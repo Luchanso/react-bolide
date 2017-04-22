@@ -1,39 +1,61 @@
 /* global __dir */
 
 const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const assembly = require('./package.json');
 
 const { VERSION = 0 } = assembly;
-const ENV = 'development';
+const ENV = JSON.stringify('development');
 
-module.exports = {
-  entry: ['index.js'],
-  resolve: {
-    extensions: ['.js', '.jsx', '.json'],
-  },
-  metadata: {
+const definePlugin = new webpack.DefinePlugin({
+  assembly: {
     ENV,
     VERSION,
+  },
+});
+
+const htmlWebpackPlugin = new HtmlWebpackPlugin({
+  filename: 'index.html',
+  template: 'pages/index.html',
+});
+
+module.exports = {
+  entry: ['./views/app.jsx'],
+  output: {
+    path: path.join(__dirname, 'build'),
+    filename: 'bundle.js?v=[hash]',
+  },
+  resolve: {
+    extensions: ['.js', '.jsx', '.json'],
   },
   devtool: 'source-map',
   module: {
     loaders: [
       {
         test: /\.(jpg|gif|png|woff|woff2|eot|ttf|svg)(\?.*)*$/,
-        loader: 'url-loader',
+        loader: 'file-loader?name=[path].[ext]?v=[hash:sha1]',
       }, {
         exclude: /node_modules/,
         test: /\.css$/,
-        loader: ['css-loader', 'style-loader'],
+        use: [{
+          loader: 'style-loader',
+        }, {
+          loader: 'css-loader',
+          options: {
+            modules: true,
+            localIdentName: '[path]__[local]--[hash:base64:5]',
+          },
+        }],
       }, {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
       },
     ],
   },
-  output: {
-    path: path.join(__dir, 'build'),
-    filename: 'bundle.js?v=[hash]',
-  },
+  plugins: [
+    definePlugin,
+    htmlWebpackPlugin,
+  ],
 };
