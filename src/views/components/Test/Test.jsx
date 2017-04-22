@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import reactLogo from 'images/react-logo.svg';
 import styles from './test.css';
-import reactLogo from '../../../assets/images/react-logo.svg';
 
 const Test = props => (
   <div className={styles.TestWrapper}>

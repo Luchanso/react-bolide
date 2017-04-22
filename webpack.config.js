@@ -1,5 +1,3 @@
-/* global __dir */
-
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -21,13 +19,14 @@ const htmlWebpackPlugin = new HtmlWebpackPlugin({
 });
 
 module.exports = {
-  entry: ['src'],
+  entry: [path.resolve(__dirname, 'src')],
   output: {
     path: path.join(__dirname, 'build'),
     filename: 'bundle.js?v=[hash]',
   },
+  context: __dirname,
   resolve: {
-    extensions: ['.js', '.jsx', '.json'],
+    extensions: ['.js', '.jsx', '.css', '.json'],
     modules: [
       path.resolve(__dirname, 'src'),
       path.resolve(__dirname, 'assets'),
@@ -39,7 +38,7 @@ module.exports = {
     loaders: [
       {
         test: /\.(jpg|gif|png|woff|woff2|eot|ttf|svg)(\?.*)*$/,
-        loader: 'file-loader?name=[path].[ext]?v=[hash:sha1]',
+        loader: 'file-loader?name=[path][name].[ext]?v=[sha256:hash]',
       }, {
         exclude: /node_modules/,
         test: /\.css$/,
