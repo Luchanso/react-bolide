@@ -5,6 +5,8 @@
   "main": "webpack.config.js",
   "scripts": {
     "dev": "webpack --watch",
+    "lint:fix": "eslint ./src --ext .js,.jsx --fix",
+    "lint": "eslint ./src --ext .js,.jsx",
     "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
