@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Test from './components/Test';
+import Test from './views/components/Test';
 
 /* eslint-disable no-console */
 console.log({ assembly });
