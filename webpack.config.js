@@ -5,7 +5,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const assembly = require('./package.json');
 
-const { VERSION = 0 } = assembly;
+const VERSION = JSON.stringify(assembly.version || 0);
 const ENV = JSON.stringify('development');
 
 const definePlugin = new webpack.DefinePlugin({
@@ -21,13 +21,18 @@ const htmlWebpackPlugin = new HtmlWebpackPlugin({
 });
 
 module.exports = {
-  entry: ['./views/app.jsx'],
+  entry: ['src'],
   output: {
     path: path.join(__dirname, 'build'),
     filename: 'bundle.js?v=[hash]',
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
+    modules: [
+      path.resolve(__dirname, 'src'),
+      path.resolve(__dirname, 'assets'),
+      path.resolve(__dirname, 'node_modules'),
+    ],
   },
   devtool: 'source-map',
   module: {
@@ -44,7 +49,7 @@ module.exports = {
           loader: 'css-loader',
           options: {
             modules: true,
-            localIdentName: '[path]__[local]--[hash:base64:5]',
+            localIdentName: '[path][name]__[local]--[hash:base64:5]',
           },
         }],
       }, {
