@@ -2,12 +2,16 @@
   background-color: rgb(128, 180, 227);
   min-height: calc(100vh - 50px * 2);
   margin: 50px;
+  text-align: center;
 }
 
 .Title {
   color: white;
   padding-top: 15px;
   font-family: Arial;
-  text-align: center;
-  align-content: center;
+}
+
+.Image {
+  width: 100px;
+  height: 100px;
 }

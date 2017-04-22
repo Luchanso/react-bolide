@@ -7,7 +7,7 @@ import styles from './test.css';
 const Test = props => (
   <div className={styles.TestWrapper}>
     <h1 className={styles.Title}>{props.text}</h1>
-    <img alt="react-logo" src={reactLogo} />
+    <img alt="react-logo" className={styles.Image} src={reactLogo} />
   </div>
 );
 
