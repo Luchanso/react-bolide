@@ -1,0 +1,9 @@
+.TestWrapper {
+  background-color: rgb(128, 180, 227);
+  min-height: 100vh;
+  margin: 50px;
+}
+
+.Title {
+  font-family: Arial;
+}
