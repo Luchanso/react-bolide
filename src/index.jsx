@@ -1,13 +1,11 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
-
-import Test from './views/components/Test';
+import Router from 'Router';
 
 /* eslint-disable no-console */
 console.log({ assembly });
 /* eslint-enable */
 
 ReactDOM.render(
-  <Test text="Hello world" />,
+  Router,
   document.getElementById('app'),
 );
