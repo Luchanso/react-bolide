@@ -1,3 +1,4 @@
+import React from 'react';
 import ReactDOM from 'react-dom';
 import Router from 'Router';
 
@@ -6,6 +7,6 @@ console.log({ assembly });
 /* eslint-enable */
 
 ReactDOM.render(
-  Router,
+  <Router />,
   document.getElementById('app'),
 );
